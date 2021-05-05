@@ -17,7 +17,7 @@ func _physics_process(delta):
 	jump()
 	move()
 	move_and_slide(motion, UP)
-	get_slide_collision()
+#	get_slide_collision(50)
 	print(motion)
 	
 
