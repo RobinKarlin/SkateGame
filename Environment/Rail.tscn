@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/tileset.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Area2D
+
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 49.528, 2.02874 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 49.1443, 1.73369 )
+
+[node name="Rail" type="Area2D"]
+collision_layer = 2
+collision_mask = 2147483649
+script = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.235962, -21.1684 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 200, 99, 42.856 )
+region_filter_clip = true
+
+[node name="CollisionChecker" type="CollisionShape2D" parent="."]
+position = Vector2( -0.275467, -15.5739 )
+shape = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+position = Vector2( 0, -15.338 )
+
+[node name="StaticCollider" type="CollisionShape2D" parent="StaticBody"]
+shape = SubResource( 1 )
+one_way_collision = true
+[connection signal="body_entered" from="." to="." method="_on_Rail_body_entered"]
