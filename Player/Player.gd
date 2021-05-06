@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var motion = Vector2(0,0)
 var grinding = false
+
 const SPEED = 400
 const PUSHSPEED = 75
 const SLOWDOWN = 1
@@ -16,11 +17,9 @@ func _physics_process(delta):
 	apply_gravity()
 	jump()
 	move()
-	move_and_slide(motion, UP)
-#	get_slide_collision(50)
+	move_and_slide(motion, UP, false, 44)
 	print(motion)
-	print("hej")
-	
+
 
 
 func apply_gravity():
@@ -30,6 +29,9 @@ func apply_gravity():
 		motion.y += GRAVITY
 	if is_on_ceiling():
 		motion.y = 1
+	if is_on_wall():
+		motion.x = 0
+		
 
 
 func jump():
@@ -37,8 +39,11 @@ func jump():
 		motion.y -= JUMP_SPEED
 
 
+#func collide():
+	
 
-func grind():	
+
+func grind():
 	motion.x += 10 + motion.x
 	if grinding != true:
 		grinding = true
@@ -82,6 +87,7 @@ func move():
 func reset_game():
 	if Input.is_action_pressed("reset_game"):
 		get_tree().reload_current_scene()
+		get_floor_normal()
 		
 	
 
