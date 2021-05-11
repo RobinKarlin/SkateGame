@@ -35,7 +35,11 @@ func _process(delta):
 	if OS.get_ticks_msec() >  next_dir_time:
 		dir = next_dir
 	
-	
+	#sprite Direction
+#	if vel.x < 0:
+#		player.flip_h = true
+#	elif vel.x > 0:
+#		player.flip_h = false
 	
 	vel.x = dir * 500
 	
