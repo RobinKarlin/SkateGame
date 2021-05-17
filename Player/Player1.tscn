@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Player1.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player_sprites.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Wheel_01.png" type="Texture" id=3]
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.1
+rough = true
+absorbent = true
+
+[sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 10.2583
+height = 19.2264
+
+[node name="Player" type="RigidBody2D"]
+collision_mask = 2
+mass = 3.06122
+physics_material_override = SubResource( 3 )
+gravity_scale = 40.0
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 1 )
+move_speed = 50
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -31.8198 )
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 400, 0 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="FrontWheel" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( 8.1875, -2.781 )
+collision_mask = 2
+gravity_scale = 2.0
+angular_velocity = 40.0
+
+[node name="PinJoint2D" type="PinJoint2D" parent="FrontWheel"]
+scale = Vector2( 0.3, 0.3 )
+node_a = NodePath("..")
+node_b = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontWheel"]
+scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="FrontWheel"]
+scale = Vector2( 0.343752, 0.343752 )
+texture = ExtResource( 3 )
+
+[node name="BackWheel" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( -11.375, -2.781 )
+collision_mask = 2
+mass = 9.528
+gravity_scale = 2.0
+angular_velocity = 40.0
+
+[node name="PinJoint2D" type="PinJoint2D" parent="BackWheel"]
+scale = Vector2( 0.325, 0.3 )
+node_a = NodePath("..")
+node_b = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackWheel"]
+scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="BackWheel"]
+rotation = 0.768797
+scale = Vector2( 0.343752, 0.343752 )
+texture = ExtResource( 3 )
+
+[node name="JustAiredTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -17.4614 )
+shape = SubResource( 4 )

@@ -8,29 +8,34 @@ const PUSHSPEED = 75
 const SLOWDOWN = 1
 const MAXSPEED = 375
 const WORLD_LIMIT = 3500
-const GRAVITY = 25
+const GRAVITY = 5
 const UP = Vector2(0,-1)
+const FLOOR_NORMAL = Vector2.UP
 const JUMP_SPEED = GRAVITY + 500
 
 
 func _physics_process(delta):
-	apply_gravity()
+	motion.y += GRAVITY * delta
+	motion = move_and_slide(motion, FLOOR_NORMAL)
+#	apply_gravity()
 	jump()
 	move()
-	move_and_slide(motion, UP, false, 44)
-	print(motion)
+#	move_and_slide(motion,FLOOR_NORMAL, false, 44)
+##	IsOnSlope()
+	print(rotation)
 
 
 
-func apply_gravity():
-	if is_on_floor() and motion.y > 0:
-		motion.y = 0
-	else:
-		motion.y += GRAVITY
-	if is_on_ceiling():
-		motion.y = 1
-	if is_on_wall():
-		motion.x = 0
+#func apply_gravity():
+#	if is_on_floor() and motion.y > 0:
+#		motion.y = 0
+##		rotation = get_floor_normal().angle() + PI/2
+#	else:
+#		motion.y += GRAVITY
+#	if is_on_ceiling():
+#		motion.y = 1
+#	if is_on_wall():
+#		motion.x = 0
 		
 
 
@@ -39,7 +44,9 @@ func jump():
 		motion.y -= JUMP_SPEED
 
 
-#func collide():
+#func IsOnSlope():
+#	if get_floor_normal().angle() != 0 :
+#		motion.x -= 5
 	
 
 
@@ -55,6 +62,7 @@ func grind():
 func move():
 	var SpeedLevel = MAXSPEED / 2	
 #	Increase speed left
+
 	if Input.is_action_just_pressed("left"):
 		if motion.x != -MAXSPEED:
 			if motion.x > -SpeedLevel:
