@@ -23,10 +23,12 @@ var state_strings: = {
 
 const FLOOR_NORMAL := Vector2.UP
 export var move_speed = 400
-export var air_speed = 10.0
-export var jump_force = 5000.0
-export var climb_force = 500.0
-const MAXSPEED = 200
+export var air_speed = 100.0
+export var jump_force := Vector2(0,-1200)
+var jump_force_offset := Vector2(-40,0)
+export var push_force := Vector2(5000,0)
+var push_force_offset := Vector2(-30,-5)
+const MAXSPEED = 200.0
 
 var _state: int = IDLE
 
@@ -37,33 +39,34 @@ func _integrate_forces(state: Physics2DDirectBodyState):
 	var is_on_ground := state.get_contact_count() > 0 and int(state.get_contact_collider_position(0).y) >= int(global_position.y)
 	
 	var move_direction := get_move_direction()
-	print(linear_velocity)
+#	print(player_rot)
+	
+	
 	
 	match _state:
 		IDLE:
 			if move_direction.x:
 				change_state(MOVING)
-			elif is_on_ground and Input.is_action_just_pressed("ollie"):
-				apply_central_impulse(Vector2.UP * jump_force)
+			if is_on_ground and Input.is_action_just_pressed("ollie"):
+				apply_impulse(jump_force_offset, jump_force)	
 				change_state(AIR)
 		
-		MOVING:
+		MOVING:			
 			if not move_direction.x:
 				change_state(IDLE)
 			elif state.get_contact_count() == 0:
 				change_state(AIR)
 			elif is_on_ground and Input.is_action_just_pressed("ollie"):
-				apply_central_impulse(Vector2.UP * jump_force)
+				apply_impulse(jump_force_offset, jump_force)
 				change_state(AIR)
-			if linear_velocity.x != MAXSPEED:
-				state.linear_velocity.x += move_direction.x * move_speed
-			
-						
+			apply_impulse(push_force_offset, push_force)
+
 		AIR:
 			if move_direction.x:
 				state.linear_velocity.x += move_direction.x * air_speed
 			if is_on_ground and just_aired_timer.is_stopped():
 				change_state(IDLE)
+				
 	
 
 
@@ -87,10 +90,7 @@ func enter_state():
 
 
 func get_move_direction() -> Vector2:
-	return Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		0.0
-	)
+	return Vector2(Input.is_action_just_pressed("right"), 0)
 
 #func _process(delta):
 #	if Input.is_action_just_pressed("right"):
