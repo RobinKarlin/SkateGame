@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Player1.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player_01.png" type="Texture" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+rough = true
+bounce = 0.1
+absorbent = true
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 14.1676
+height = 26.0392
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 8.65599
+height = 0.0
+
+[node name="Player" type="RigidBody2D"]
+collision_mask = 0
+mode = 2
+mass = 1.5
+physics_material_override = SubResource( 1 )
+gravity_scale = 13.0
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 1 )
+move_speed = 50
+push_force = Vector2( 2500, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.133881, -32 )
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 400, 0 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="JustAiredTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4.51981, -33.9512 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -11.9828, -8.09364 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( 10.5112, -8.09364 )
+rotation = 1.5708
+shape = SubResource( 3 )
