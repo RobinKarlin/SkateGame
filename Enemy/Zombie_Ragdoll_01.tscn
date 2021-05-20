@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Sprites/CH_E_Head_01.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/CH_E_Arm_01.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/CH_E_Torse_01.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/CH_E_Arm_01.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/CH_E_Torse_01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/CH_E_Head_01.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/CH_E_Leg_01.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -12,10 +12,10 @@ height = 57.8445
 [sub_resource type="CapsuleShape2D" id=2]
 height = 16.7052
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=3]
 height = 5.31528
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 15.4271
 height = 19.0098
 
@@ -25,7 +25,7 @@ height = 17.2333
 [sub_resource type="CapsuleShape2D" id=6]
 height = 27.4722
 
-[node name="Enemy_Zomb_01" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="head" type="RigidBody2D" parent="."]
 position = Vector2( -19.9667, -47.5063 )
@@ -33,9 +33,10 @@ rotation = -0.382915
 scale = Vector2( 0.1, 0.1 )
 
 [node name="CH_E_Head_01" type="Sprite" parent="head"]
-position = Vector2( 166.259, -46.1657 )
+position = Vector2( 179.385, -50.3968 )
 rotation = 0.382915
-texture = ExtResource( 1 )
+scale = Vector2( 7, 7 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head"]
 position = Vector2( 185.61, -212.686 )
@@ -47,8 +48,9 @@ rotation = -0.382915
 scale = Vector2( 0.1, 0.1 )
 
 [node name="CH_E_Leg_02" type="Sprite" parent="Leg_Right"]
-position = Vector2( 48.7375, 384.538 )
+position = Vector2( -580.869, 1968.89 )
 rotation = 0.382915
+scale = Vector2( 7, 7 )
 texture = ExtResource( 4 )
 offset = Vector2( 0, -282.222 )
 
@@ -64,14 +66,16 @@ rotation = -0.382915
 scale = Vector2( 0.1, 0.1 )
 
 [node name="CH_E_Arm_02" type="Sprite" parent="Arm_right"]
-texture = ExtResource( 2 )
+position = Vector2( -1022.39, 480.038 )
+scale = Vector2( 7, 7 )
+texture = ExtResource( 1 )
 offset = Vector2( 167.13, -78.7522 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm_right"]
 position = Vector2( 21.8647, -20.9976 )
 rotation = 1.29348
 scale = Vector2( 3.17968, 10.0092 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="torse" type="RigidBody2D" parent="."]
 position = Vector2( -20.055, -47.5063 )
@@ -81,13 +85,14 @@ scale = Vector2( 0.1, 0.1 )
 [node name="CH_E_Torse_01" type="Sprite" parent="torse"]
 position = Vector2( 231.411, 37.1258 )
 rotation = 0.382915
-texture = ExtResource( 3 )
+scale = Vector2( 7, 7 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="torse"]
 position = Vector2( 232.014, 12.6614 )
 rotation = -3.14159
 scale = Vector2( 5.3851, -6.48247 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Arm_left" type="RigidBody2D" parent="."]
 position = Vector2( -20.055, -47.5063 )
@@ -95,10 +100,10 @@ rotation = -0.382915
 scale = Vector2( 0.1, 0.1 )
 
 [node name="CH_E_Arm_01" type="Sprite" parent="Arm_left"]
-position = Vector2( 102.986, 61.4605 )
+position = Vector2( -778.219, 803.008 )
 rotation = -0.263456
-scale = Vector2( 1, 1 )
-texture = ExtResource( 2 )
+scale = Vector2( 7, 7 )
+texture = ExtResource( 1 )
 offset = Vector2( 167.13, -78.7522 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm_left"]
@@ -113,8 +118,9 @@ rotation = -0.382915
 scale = Vector2( 0.1, 0.1 )
 
 [node name="CH_E_Leg_01" type="Sprite" parent="Leg_Left"]
-position = Vector2( 139.718, 417.639 )
+position = Vector2( -504.3, 1995.24 )
 rotation = 0.382915
+scale = Vector2( 7, 7 )
 texture = ExtResource( 4 )
 offset = Vector2( 0, -282.222 )
 

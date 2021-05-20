@@ -8,7 +8,7 @@ export var score: = 100
 var grav = 1800
 var vel = Vector2(0, 0)
 var max_grav = 3000
-
+var state_machine
 var react_time = 1200
 var dir = 0
 var next_dir = 0
@@ -20,8 +20,11 @@ var next_dir_time = 0
 
 func _ready():
 	set_process(true)
+	state_machine = $AnimationTree.get("parameters/playback")
+	
 
 func _process(delta):
+	var current = state_machine.get_current_node()
 	if player.position.x < position.x and next_dir != -1:
 		next_dir = -1
 		next_dir_time = OS.get_ticks_msec() + react_time
@@ -35,12 +38,16 @@ func _process(delta):
 	if OS.get_ticks_msec() >  next_dir_time:
 		dir = next_dir
 	
-	#sprite Direction
-#	if vel.x < 0:
-#		player.flip_h = true
-#	elif vel.x > 0:
-#		player.flip_h = false
-	
+	#enemy Direction
+	if vel.x < 0:
+		player.flip_h = true
+	elif vel.x > 0:
+		player.flip_h = false
+	if vel.length() == 0:
+		state_machine.travel("Idle")
+	if vel.length() > 0:
+		state_machine.travel("Run")
+		
 	vel.x = dir * 500
 	
 	
