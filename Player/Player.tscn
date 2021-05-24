@@ -1,26 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player_sprites.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player_01.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21.6624, 10 )
 
-[node name="Player" type="KinematicBody2D"]
-collision_mask = 2
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 14.1676
+height = 26.0392
+
+[node name="Player" type="RigidBody2D"]
+collision_mask = 0
+mode = 2
+mass = 1.5
+physics_material_override = SubResource( 1 )
+gravity_scale = 13.0
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 1 )
+move_speed = 50
+push_force = Vector2( 2500, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -31.8198 )
+position = Vector2( 0.133881, -32 )
 texture = ExtResource( 2 )
-hframes = 8
-vframes = 3
-
-[node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2( -0.125141, -28.8972 )
-rotation = 1.5708
-shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 500, 0 )
+offset = Vector2( 400, 0 )
 current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="JustAiredTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4.51981, -33.9512 )
+shape = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 9.53674e-07, 0 )
+scale = Vector2( 2.5, 1 )
+polygon = PoolVector2Array( -8, -8, 8, -8, 0, 0 )
