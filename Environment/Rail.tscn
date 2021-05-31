@@ -7,7 +7,7 @@ script/source = "extends StaticBody2D
 
 "
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.1443, 1.73369 )
 
 [node name="Rail" type="StaticBody2D"]
@@ -24,5 +24,5 @@ region_filter_clip = true
 
 [node name="StaticCollider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15.338 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 one_way_collision = true

@@ -32,7 +32,6 @@ func _physics_process(delta):
 	move()
 	landing()
 	move_and_slide(motion, FLOOR_NORMAL, false, 4, PI/4, false)
-#	grind()
 
 #	Collide with rigid body and give it a push * player speed
 	for index in get_slide_count():
@@ -42,21 +41,18 @@ func _physics_process(delta):
 			collision.collider.apply_central_impulse(collision.normal * pushforce)
 			
 	
-##	IsOnSlope()
-	
 
-
-
-func apply_gravity():
-	if is_on_floor() and motion.y > 0:
-		motion.y = 0
-		rotation = get_floor_normal().angle() + PI/2
+func apply_gravity():	
+	if is_on_floor() and $RayCast2D.is_colliding():
+		motion.y = 0		
 	else:
 		motion.y += GRAVITY
 	if is_on_ceiling():
 		motion.y = 1
-	if is_on_wall():
-		motion.x = 0
+	if is_on_floor():
+		rotation = get_floor_normal().angle() + PI/2
+#	if is_on_wall():
+#		motion.x = 0
 
 
 func landing():	
