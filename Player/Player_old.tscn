@@ -1,13 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player_old.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player_01.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 11.0608
 height = 32.0532
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Attack"
+length = 0.323
+tracks/0/type = "value"
+tracks/0/path = NodePath("AttackArea2d/AttackCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.0764, 24.923 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
@@ -19,7 +38,7 @@ texture = ExtResource( 2 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.08144, -35.0536 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 400, 0 )
@@ -28,7 +47,7 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="SkateboardCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9.99001 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="JustAiredTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -37,3 +56,16 @@ one_shot = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 5 )
 collision_mask = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 4 )
+
+[node name="AttackArea2d" type="Area2D" parent="."]
+position = Vector2( 0, -31.8198 )
+
+[node name="AttackCollision" type="CollisionShape2D" parent="AttackArea2d"]
+position = Vector2( 22.8922, -0.148649 )
+shape = SubResource( 1 )
+disabled = true
+
+[connection signal="area_entered" from="AttackArea2d" to="." method="_on_AttackArea2d_area_entered"]

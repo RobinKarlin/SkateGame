@@ -18,11 +18,6 @@ const UP = Vector2(0,-1)
 const FLOOR_NORMAL = Vector2.UP
 const JUMP_SPEED = GRAVITY + 500
 
-func reset_game():
-	if Input.is_action_just_pressed("reset_game"):
-		get_tree().change_scene("res://Scenes/MainScene.tscn")
-
-
 
 func _physics_process(delta):	
 	motion.y += GRAVITY * delta
@@ -30,19 +25,28 @@ func _physics_process(delta):
 	apply_gravity()
 	jump()
 	move()
-	landing()
+	attack()
+#	landing()
 	move_and_slide(motion, FLOOR_NORMAL, false, 4, PI/4, false)
+	colliding()
+	reset_game()
+
+
+func reset_game():
+	if Input.is_action_just_pressed("reset_game"):
+		get_tree().change_scene("res://Scenes/MainScene.tscn")
+
 
 #	Collide with rigid body and give it a push * player speed
+func colliding():
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
 		if collision.collider.is_in_group("bodies"):
 			collision.collider.apply_central_impulse(-collision.normal * (motion/7).length() * pushforce)
 			collision.collider.apply_central_impulse(collision.normal * pushforce)
-			
-	
 
-func apply_gravity():	
+
+func apply_gravity():
 	if is_on_floor() and $RayCast2D.is_colliding():
 		motion.y = 0		
 	else:
@@ -51,10 +55,9 @@ func apply_gravity():
 		motion.y = 1
 	if is_on_floor():
 		rotation = get_floor_normal().angle() + PI/2
-#	if is_on_wall():
-#		motion.x = 0
 
 
+# does not work right now
 func landing():	
 	if get_floor_normal() == FloorNormal:
 		if Input.is_action_just_pressed("ollie"):
@@ -62,11 +65,8 @@ func landing():
 		if just_aired_timer.is_stopped() and !is_on_floor():
 			JustAired = true
 		if is_on_floor() and JustAired:
-			motion.x += 1.5 * motion.x / 4
+			motion.x += 5 * motion.x / 4
 			JustAired = false
-		print(JustAired)
-	
-
 
 
 func jump():
@@ -74,24 +74,8 @@ func jump():
 		motion.y -= JUMP_SPEED
 
 
-#func IsOnSlope():
-#	if get_floor_normal().angle() != 0 :
-#		motion.x -= 5
-	
-
-
-#func grind():
-#	if Input.is_action_just_pressed("grind"):
-#		grinding = true
-#	else:
-#		grinding = false
-#	motion.x += 10 + motion.x
-	
-
 func move():
-	var SpeedLevel = MAXSPEED / 2	
-#	Increase speed left
-
+	var SpeedLevel = MAXSPEED / 2
 	if Input.is_action_just_pressed("left"):
 		if motion.x != -MAXSPEED:
 			if motion.x > -SpeedLevel:
@@ -120,9 +104,11 @@ func move():
 		motion.x = 0
 
 
+func attack():
+	if Input.is_action_just_pressed("attack"):
+		$AnimationPlayer.play("Attack")
 
 
-
-
-
-
+func _on_AttackArea2d_area_entered(area):
+	if area.is_in_group("bodies"):
+		area.get_parent().getting_hit()
