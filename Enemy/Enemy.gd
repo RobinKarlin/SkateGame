@@ -22,6 +22,13 @@ func _ready():
 	set_process(true)
 	state_machine = $AnimationTree.get("parameters/playback")
 	
+func _on_StompDetector_body_entered(body: PhysicsBody2D) -> void:
+	if body.global_position.y > get_node("StompDetector").global_position.y:
+		return
+		get_node("CollisionShape2D").disabled = true
+	queue_free()
+
+
 
 func _process(delta):
 	var current = state_machine.get_current_node()
@@ -34,27 +41,34 @@ func _process(delta):
 	elif player.position.x == position.x and next_dir != 0:
 		next_dir = 0
 		next_dir_time = OS.get_ticks_msec() + react_time
-		
+
 	if OS.get_ticks_msec() >  next_dir_time:
 		dir = next_dir
 	
 	#enemy Direction
-	if vel.x < 0:
-		player.flip_h = true
-	elif vel.x > 0:
-		player.flip_h = false
-	if vel.length() == 0:
-		state_machine.travel("Idle")
-	if vel.length() > 0:
-		state_machine.travel("Run")
-		
+#	if vel.x < 0:
+#		player.flip_h = true
+#	elif vel.x > 0:
+#		player.flip_h = false
+#	if vel.length() == 0:
+#		state_machine.travel("Idle")
+#	if vel.length() > 0:
+#		state_machine.travel("Run")
+
 	vel.x = dir * 500
-	
-	
+
+
 	vel.y += grav * delta;
 	if vel.y > max_grav:
 		vel.y = max_grav
-	
+
 	if is_on_floor() and vel.y > 0:
 		vel.y = 0
+	if is_on_wall():
+		vel.x *= -1.0
 	vel = move_and_slide(vel, Vector2(0, 1))
+	
+
+
+
+

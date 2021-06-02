@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/CH_E_fullSheet_01.png" type="Texture" id=1]
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.0609, 41.1748 )
+extents = Vector2( 15.6445, 33.7259 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -803,12 +803,17 @@ transitions = [ "Idle", "Run", SubResource( 6 ), "Run", "Idle", SubResource( 7 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 17.4993, 7.75835 )
+
 [node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 0.117859, 0 )
+collision_layer = 8
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.91025, -45.2283 )
+position = Vector2( 5.77899, -36.1186 )
 shape = SubResource( 1 )
 
 [node name="Polygons" type="Node2D" parent="."]
@@ -998,3 +1003,15 @@ tree_root = SubResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 9 )
+
+[node name="StompDetector" type="Area2D" parent="."]
+modulate = Color( 0.505882, 0.490196, 0.843137, 1 )
+position = Vector2( 3.64389, -69.9346 )
+monitorable = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
+position = Vector2( 4.34462, -8.40895 )
+shape = SubResource( 10 )
+
+[connection signal="body_entered" from="StompDetector" to="." method="_on_StompDetector_body_entered"]

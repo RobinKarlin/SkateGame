@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Player/Player_old.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Materials/M_Road_01.tres" type="Resource" id=13]
 [ext_resource path="res://Sprites/Box.png" type="Texture" id=14]
 [ext_resource path="res://addons/rmsmartshape/materials/shape_material.gd" type="Script" id=15]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 160, 0, 160, 80, 0, 80 )
@@ -344,7 +345,7 @@ width = 1.0
 
 [sub_resource type="Resource" id=75]
 script = ExtResource( 11 )
-position = Vector2( 439.765, 131.515 )
+position = Vector2( 464.486, -37.2927 )
 point_in = Vector2( 0, 0 )
 point_out = Vector2( 0, 0 )
 properties = SubResource( 74 )
@@ -435,7 +436,7 @@ width = 1.0
 
 [sub_resource type="Resource" id=89]
 script = ExtResource( 11 )
-position = Vector2( 439.765, 131.515 )
+position = Vector2( 464.486, -37.2927 )
 point_in = Vector2( 0, 0 )
 point_out = Vector2( 0, 0 )
 properties = SubResource( 88 )
@@ -558,6 +559,45 @@ point_out = Vector2( 0, 0 )
 properties = SubResource( 106 )
 
 [sub_resource type="Resource" id=108]
+script = ExtResource( 12 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=109]
+script = ExtResource( 11 )
+position = Vector2( 388.107, 137.548 )
+point_in = Vector2( 0, 0 )
+point_out = Vector2( 0, 0 )
+properties = SubResource( 108 )
+
+[sub_resource type="Resource" id=110]
+script = ExtResource( 12 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=111]
+script = ExtResource( 11 )
+position = Vector2( 465.801, 131.191 )
+point_in = Vector2( 0, 0 )
+point_out = Vector2( 0, 0 )
+properties = SubResource( 110 )
+
+[sub_resource type="Resource" id=112]
+script = ExtResource( 12 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=113]
+script = ExtResource( 11 )
+position = Vector2( 386.694, -36.9108 )
+point_in = Vector2( 0, 0 )
+point_out = Vector2( 0, 0 )
+properties = SubResource( 112 )
+
+[sub_resource type="Resource" id=114]
 script = ExtResource( 10 )
 _points = {
 1: SubResource( 75 ),
@@ -576,13 +616,16 @@ _points = {
 33: SubResource( 101 ),
 34: SubResource( 103 ),
 36: SubResource( 105 ),
-37: SubResource( 107 )
+37: SubResource( 107 ),
+38: SubResource( 109 ),
+39: SubResource( 111 ),
+40: SubResource( 113 )
 }
-_point_order = [ 1, 8, 23, 16, 22, 36, 37, 29, 33, 31, 34, 32, 30, 20, 15, 28, 27 ]
+_point_order = [ 1, 39, 8, 23, 16, 22, 36, 37, 29, 33, 31, 34, 32, 30, 20, 15, 28, 38, 40, 27 ]
 _constraints = {
 [ 1, 27 ]: 15
 }
-_next_key = 38
+_next_key = 41
 
 [sub_resource type="Resource" id=60]
 script = ExtResource( 15 )
@@ -651,7 +694,7 @@ collision_layer = 4
 [node name="SS2D_Shape_Closed" type="Node2D" parent="StaticBody2D2"]
 script = ExtResource( 6 )
 curve_bake_interval = 16.843
-_points = SubResource( 108 )
+_points = SubResource( 114 )
 material_overrides = {
 }
 shape_material = SubResource( 60 )
@@ -665,7 +708,7 @@ collision_polygon_node_path = NodePath("../CollisionPolygon2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
 modulate = Color( 1, 1, 1, 0.3 )
-polygon = PoolVector2Array( 434.663, 129.851, 597.958, 128.313, 616.917, 128.56, 634.512, 131.171, 650.889, 135.853, 666.195, 142.332, 680.578, 150.33, 694.187, 159.567, 719.661, 180.677, 767.794, 225.685, 792.804, 245.177, 806.056, 253.211, 820.006, 259.735, 845.836, 269.194, 867.504, 275.207, 887.369, 278.294, 907.792, 278.959, 1042.3, 267.502, 1291.88, 245.104, 1454.46, 248.488, 1547.17, 259.47, 1648.25, 278.784, 1676.1, 287.15, 1706.8, 300.029, 1776.12, 338.081, 1941.73, 454.675, 2343.84, 780.222, 2769.81, 1096.42, 2870.1, 1155.38, 2965.25, 1201.33, 3010.49, 1218.66, 3053.95, 1231.79, 3095.46, 1240.44, 3134.86, 1244.28, 3210.34, 1243.54, 3283.4, 1236.55, 3353.7, 1224.19, 3420.9, 1207.3, 3544.66, 1163.49, 3651.97, 1112.06, 3740.13, 1059.96, 3806.45, 1014.14, 3862.58, 968.522, 4367.35, 1037.1, 4945.26, 1135.12, 5437.29, 1171.43, 5666.88, 1161.28, 5769.17, 1145.98, 5859.93, 1122.68, 6525.89, 965.04, 6596.41, 941.693, 6661.22, 914.43, 6719.46, 882.336, 6745.85, 864.187, 6770.26, 844.476, 6792.6, 823.091, 6812.76, 799.915, 6830.63, 774.833, 6846.1, 747.73, 6859.06, 718.487, 6869.41, 686.989, 6877.03, 653.119, 6881.83, 616.763, 6892.57, 547.034, 6900.79, 516.181, 6910.71, 487.859, 6922.21, 461.968, 6935.13, 438.4, 6949.34, 417.054, 6964.71, 397.823, 6981.08, 380.604, 6998.33, 365.292, 7016.31, 351.784, 7034.88, 339.968, 7073.24, 321.019, 7112.31, 307.619, 7150.96, 298.924, 7188.07, 294.092, 7253.23, 292.703, 7298.87, 296.776, 7316.79, 298.767, 7795.77, 1658.29, 5228.17, 1610.98, 2810.95, 1460.31, 875.917, 475.085, 613.348, 263.677 )
+polygon = PoolVector2Array( 466.126, -38.9543, 467.46, 129.481, 597.958, 128.313, 616.917, 128.56, 634.512, 131.171, 650.889, 135.853, 666.195, 142.332, 680.578, 150.33, 694.187, 159.567, 719.661, 180.677, 767.794, 225.685, 792.804, 245.177, 806.056, 253.211, 820.006, 259.735, 845.836, 269.194, 867.504, 275.207, 887.369, 278.294, 907.792, 278.959, 1042.3, 267.502, 1291.88, 245.104, 1454.46, 248.488, 1547.17, 259.47, 1648.25, 278.784, 1676.1, 287.15, 1706.8, 300.029, 1776.12, 338.081, 1941.73, 454.675, 2343.84, 780.222, 2769.81, 1096.42, 2870.1, 1155.38, 2965.25, 1201.33, 3010.49, 1218.66, 3053.95, 1231.79, 3095.46, 1240.44, 3134.86, 1244.28, 3210.34, 1243.54, 3283.4, 1236.55, 3353.7, 1224.19, 3420.9, 1207.3, 3544.66, 1163.49, 3651.97, 1112.06, 3740.13, 1059.96, 3806.45, 1014.14, 3862.58, 968.522, 4367.35, 1037.1, 4945.26, 1135.12, 5437.29, 1171.43, 5666.88, 1161.28, 5769.17, 1145.98, 5859.93, 1122.68, 6525.89, 965.04, 6596.41, 941.693, 6661.22, 914.43, 6719.46, 882.336, 6745.85, 864.187, 6770.26, 844.476, 6792.6, 823.091, 6812.76, 799.915, 6830.63, 774.833, 6846.1, 747.73, 6859.06, 718.487, 6869.41, 686.989, 6877.03, 653.119, 6881.83, 616.763, 6892.57, 547.034, 6900.79, 516.181, 6910.71, 487.859, 6922.21, 461.968, 6935.13, 438.4, 6949.34, 417.054, 6964.71, 397.823, 6981.08, 380.604, 6998.33, 365.292, 7016.31, 351.784, 7034.88, 339.968, 7073.24, 321.019, 7112.31, 307.619, 7150.96, 298.924, 7188.07, 294.092, 7253.23, 292.703, 7298.87, 296.776, 7316.79, 298.767, 7795.77, 1658.29, 5228.17, 1610.98, 2810.95, 1460.31, 875.917, 475.085, 613.332, 263.699, 387.176, 138.098, 385.02, -38.5632 )
 
 [node name="SS2D_Shape_Anchor" type="Node2D" parent="."]
 position = Vector2( 191.949, 1163.06 )
@@ -678,4 +721,7 @@ position = Vector2( 258.396, -32.7292 )
 texture = ExtResource( 14 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 112, 1152 )
+position = Vector2( 101.168, 1148.02 )
+
+[node name="Enemy" parent="." instance=ExtResource( 16 )]
+position = Vector2( 785.191, 1192.47 )
