@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://Player/Player_old.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://Sprites/Box.png" type="Texture" id=14]
 [ext_resource path="res://addons/rmsmartshape/materials/shape_material.gd" type="Script" id=15]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=16]
+[ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Pickups/Pickup_Scrap.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scripts/GameState.gd" type="Script" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 160, 0, 160, 80, 0, 80 )
@@ -637,36 +640,13 @@ fill_mesh_offset = 0.0
 render_offset = 0.0
 
 [node name="MainScene" type="Node2D"]
+script = ExtResource( 19 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 10 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 2031604, 0, 0, 2162743, 3, 0, 2162748, 7, 0, 2162753, 7, 0, 2162758, 7, 0, 2162763, 7, 0, 2162768, 7, 0, 2162838, 4, 0, 2162843, 8, 0, 2162848, 8, 0, 2162849, 8, 0, 2162850, 8, 0, 2162851, 8, 0, 2162852, 8, 0, 2162853, 8, 0, 2162854, 8, 0, 2162855, 8, 0, 2162856, 8, 0, 2162857, 8, 0, 2162858, 8, 0, 2162859, 8, 0, 2162860, 8, 0, 2162865, 6, 0, 2228274, 3, 0, 2228279, 7, 0, 2228284, 7, 0, 2228289, 7, 0, 2228294, 7, 0, 2228299, 7, 0, 2228304, 7, 0, 2359284, 0, 0, 2359294, 0, 0, 2293768, 0, 0, 2293778, 0, 0, 2293788, 0, 0, 2293798, 0, 0, 2293808, 0, 0, 2293818, 0, 0, 2293828, 0, 0, 2293838, 0, 0, 2293848, 0, 0, 2293858, 0, 0, 2293859, 0, 0, 2293869, 0, 0, 2293870, 0, 0, 2293871, 0, 0, 2293872, 0, 0, 2293873, 0, 0, 2293874, 0, 0, 2293875, 0, 0, 2293876, 0, 0, 2293877, 0, 0, 2293878, 0, 0, 2293879, 0, 0, 2293880, 0, 0, 2293881, 0, 0, 2293882, 0, 0, 2293883, 0, 0, 2293884, 0, 0, 2293885, 0, 0, 2293886, 0, 0, 2293887, 0, 0, 2293888, 0, 0, 2293889, 0, 0, 2293890, 0, 0, 2293891, 0, 0, 2293901, 0, 0, 2293911, 0, 0, 2293921, 0, 0, 2293931, 0, 0, 2293941, 0, 0, 2293951, 0, 0, 2293961, 0, 0, 2293971, 0, 0, 2293981, 0, 0, 2293991, 0, 0, 2294001, 0, 0, 2294011, 0, 0, 2294021, 2, 0, 2621696, 0, 0, 2621706, 2, 0, 2884041, 0, 0, 2949381, 0, 0, 2949391, 2, 0, 3211721, 0, 0, 3277066, 0, 0, 3277076, 0, 0, 3277086, 0, 0, 3277096, 0, 0, 3277106, 0, 0, 3277116, 0, 0, 3277126, 0, 0, 3277136, 0, 0, 3408210, 0, 0, 3539284, 0, 0, 3539344, 4, 0, 3539349, 8, 0, 3539354, 8, 0, 3539359, 8, 0, 3539364, 8, 0, 3539369, 8, 0, 3539374, 8, 0, 3539379, 8, 0, 3539380, 8, 0, 3539381, 8, 0, 3539382, 8, 0, 3539383, 8, 0, 3539384, 8, 0, 3539385, 8, 0, 3539386, 8, 0, 3539387, 8, 0, 3539388, 8, 0, 3539389, 8, 0, 3539390, 8, 0, 3539391, 8, 0, 3539392, 8, 0, 3539393, 8, 0, 3539394, 8, 0, 3539395, 8, 0, 3539396, 8, 0, 3539397, 8, 0, 3539398, 8, 0, 3539399, 8, 0, 3539400, 8, 0, 3539405, 8, 0, 3539406, 8, 0, 3604906, 0, 0, 3604907, 0, 0, 3604908, 0, 0, 3604909, 0, 0, 3604910, 0, 0, 3604911, 0, 0, 3604912, 0, 0, 3604913, 0, 0, 3604914, 0, 0, 3604915, 0, 0, 3604916, 0, 0, 3604917, 0, 0, 3604930, 0, 0, 3604931, 0, 0, 3604932, 0, 0, 3604933, 0, 0, 3604934, 0, 0, 3604935, 0, 0, 3604936, 8, 0, 3604937, 8, 0, 3604938, 8, 0, 3604939, 8, 0, 3604940, 8, 0, 3604941, 8, 0, 3604942, 8, 0, 3670358, 0, 0, 3670368, 0, 0, 3670378, 0, 0, 3670388, 0, 0, 3670398, 0, 0, 3670408, 0, 0, 3670418, 0, 0, 3670428, 0, 0, 3670429, 0, 0, 3670430, 0, 0, 3670431, 0, 0, 3670432, 0, 0, 3670433, 0, 0, 3670434, 0, 0, 3670435, 0, 0, 3670436, 0, 0, 3670437, 0, 0, 3670438, 0, 0, 3670439, 0, 0, 3670440, 0, 0, 3670441, 0, 0, 3670442, 0, 0, 3670452, 0, 0, 3670453, 0, 0, 3670454, 0, 0, 3670455, 0, 0, 3670456, 0, 0, 3670457, 0, 0, 3670458, 0, 0, 3670459, 0, 0, 3670460, 0, 0, 3670461, 0, 0, 3670462, 0, 0, 3670463, 0, 0, 3670464, 0, 0, 3670465, 0, 0, 3670466, 0, 0, 3670471, 0, 0, 3670472, 0, 0, 3670473, 0, 0 )
-
-[node name="Rail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1600, 536 )
-scale = Vector2( 3.81377, 1.84963 )
-
-[node name="Rail2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2016.64, 560 )
-scale = Vector2( 3.81377, 1.84963 )
-
-[node name="Rail3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 5935.43, 897.823 )
-scale = Vector2( 3.81377, 1.84963 )
-
-[node name="Dynamic_Box25" parent="." instance=ExtResource( 4 )]
-position = Vector2( 296, 544 )
-
-[node name="Dynamic_Box26" parent="." instance=ExtResource( 4 )]
-position = Vector2( 296, 512 )
-
-[node name="Dynamic_Box27" parent="." instance=ExtResource( 4 )]
-position = Vector2( 424, 544 )
-
-[node name="Dynamic_Box28" parent="." instance=ExtResource( 4 )]
-position = Vector2( 608, 544 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 3813.05, -836.257 )
@@ -723,8 +703,54 @@ shape_point_index = 1
 position = Vector2( 258.396, -32.7292 )
 texture = ExtResource( 14 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 560 )
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 1 )]
+position = Vector2( 336, 560 )
 
 [node name="Enemy" parent="." instance=ExtResource( 16 )]
-position = Vector2( -88, 1040 )
+position = Vector2( 160, 1512 )
+
+[node name="GUI" parent="." instance=ExtResource( 17 )]
+
+[node name="Boxes" type="Node" parent="."]
+
+[node name="Dynamic_Box25" parent="Boxes" instance=ExtResource( 4 )]
+position = Vector2( 1064, 512 )
+
+[node name="Dynamic_Box26" parent="Boxes" instance=ExtResource( 4 )]
+position = Vector2( 1064, 480 )
+
+[node name="Dynamic_Box27" parent="Boxes" instance=ExtResource( 4 )]
+position = Vector2( 1064, 448 )
+
+[node name="Dynamic_Box28" parent="Boxes" instance=ExtResource( 4 )]
+position = Vector2( 1064, 416 )
+
+[node name="Rails" type="Node" parent="."]
+
+[node name="Rail" parent="Rails" instance=ExtResource( 3 )]
+position = Vector2( 1600, 536 )
+scale = Vector2( 3.81377, 1.84963 )
+
+[node name="Rail2" parent="Rails" instance=ExtResource( 3 )]
+position = Vector2( 2016.64, 560 )
+scale = Vector2( 3.81377, 1.84963 )
+
+[node name="Rail3" parent="Rails" instance=ExtResource( 3 )]
+position = Vector2( 5935.43, 897.823 )
+scale = Vector2( 3.81377, 1.84963 )
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="Pickup_Scrap" parent="Pickups" instance=ExtResource( 18 )]
+position = Vector2( 520, 520 )
+
+[node name="Pickup_Scrap2" parent="Pickups" instance=ExtResource( 18 )]
+position = Vector2( 648, 448 )
+
+[node name="Pickup_Scrap3" parent="Pickups" instance=ExtResource( 18 )]
+position = Vector2( 856, 448 )
+
+[node name="Pickup_Scrap4" parent="Pickups" instance=ExtResource( 18 )]
+position = Vector2( 992, 472 )

@@ -5,14 +5,14 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15.4522, 15.5906 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12.0793, 12.1181 )
 
 [node name="Dynamic_Box" type="RigidBody2D" groups=[
-"bodies",
+"props",
 ]]
 mass = 0.510204
 physics_material_override = SubResource( 1 )
@@ -20,17 +20,19 @@ gravity_scale = 6.0
 script = ExtResource( 2 )
 
 [node name="BoxCollision" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1.3, 1.3 )
 texture = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="." groups=[
-"bodies",
+"props",
 ]]
+collision_layer = 16
+collision_mask = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
 scale = Vector2( 1.3, 1.3 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )

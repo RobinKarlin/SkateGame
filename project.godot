@@ -224,6 +224,8 @@ attack={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Rails"
 2d_physics/layer_3="Ground"
+2d_physics/layer_4="Pickups"
+2d_physics/layer_5="Props"
 
 [physics]
 

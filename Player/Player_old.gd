@@ -4,7 +4,7 @@ onready var just_aired_timer : Timer = $JustAiredTimer
 
 var motion = Vector2(0,0)
 var grinding = false
-var pushforce = 5
+var pushforce = 2
 var JustAired = false
 var FloorNormal = Vector2(0, -1)
 
@@ -41,9 +41,9 @@ func reset_game():
 func colliding():
 	for index in get_slide_count():
 		var collision = get_slide_collision(index)
-		if collision.collider.is_in_group("bodies"):
-			collision.collider.apply_central_impulse(-collision.normal * (motion/7).length() * pushforce)
-			collision.collider.apply_central_impulse(collision.normal * pushforce)
+		if collision.collider.is_in_group("props"):
+			collision.collider.apply_central_impulse(-collision.normal * (motion/10).length() * pushforce)
+			collision.collider.apply_central_impulse(collision.normal * (pushforce+10))
 
 
 func apply_gravity():
@@ -93,7 +93,7 @@ func move():
 				motion.x += PUSHSPEED
 			if motion.x < 0:
 				motion.x += SLOWDOWN * 2
-#	Slowing down left		
+#	Slowing down left
 	if motion.x != 0:
 		if motion.x < 0:
 			motion.x += SLOWDOWN
@@ -110,5 +110,5 @@ func attack():
 
 
 func _on_AttackArea2d_area_entered(area):
-	if area.is_in_group("bodies"):
+	if area.is_in_group("props"):
 		area.get_parent().getting_hit()
