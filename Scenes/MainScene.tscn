@@ -703,54 +703,50 @@ shape_point_index = 1
 position = Vector2( 258.396, -32.7292 )
 texture = ExtResource( 14 )
 
-[node name="Player" parent="." groups=[
-"player",
-] instance=ExtResource( 1 )]
-position = Vector2( 336, 560 )
-
-[node name="Enemy" parent="." instance=ExtResource( 16 )]
-position = Vector2( 160, 1512 )
-
 [node name="GUI" parent="." instance=ExtResource( 17 )]
 
 [node name="Boxes" type="Node" parent="."]
 
 [node name="Dynamic_Box25" parent="Boxes" instance=ExtResource( 4 )]
-position = Vector2( 1064, 512 )
+position = Vector2( -8, 544 )
 
 [node name="Dynamic_Box26" parent="Boxes" instance=ExtResource( 4 )]
-position = Vector2( 1064, 480 )
+position = Vector2( -8, 512 )
 
 [node name="Dynamic_Box27" parent="Boxes" instance=ExtResource( 4 )]
-position = Vector2( 1064, 448 )
+position = Vector2( -8, 480 )
 
 [node name="Dynamic_Box28" parent="Boxes" instance=ExtResource( 4 )]
-position = Vector2( 1064, 416 )
+position = Vector2( -8, 448 )
 
 [node name="Rails" type="Node" parent="."]
 
 [node name="Rail" parent="Rails" instance=ExtResource( 3 )]
-position = Vector2( 1600, 536 )
-scale = Vector2( 3.81377, 1.84963 )
-
-[node name="Rail2" parent="Rails" instance=ExtResource( 3 )]
-position = Vector2( 2016.64, 560 )
-scale = Vector2( 3.81377, 1.84963 )
+position = Vector2( 1200, 528 )
+scale = Vector2( 4.25366, 1.82325 )
 
 [node name="Rail3" parent="Rails" instance=ExtResource( 3 )]
-position = Vector2( 5935.43, 897.823 )
-scale = Vector2( 3.81377, 1.84963 )
+position = Vector2( 3192, 560 )
+scale = Vector2( 4.25366, 1.82325 )
 
 [node name="Pickups" type="Node" parent="."]
 
 [node name="Pickup_Scrap" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 520, 520 )
+position = Vector2( 760, 400 )
 
 [node name="Pickup_Scrap2" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 648, 448 )
+position = Vector2( 888, 328 )
 
 [node name="Pickup_Scrap3" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 856, 448 )
+position = Vector2( 1096, 328 )
 
 [node name="Pickup_Scrap4" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 992, 472 )
+position = Vector2( 1232, 352 )
+
+[node name="Player" parent="." groups=[
+"player",
+] instance=ExtResource( 1 )]
+position = Vector2( 48, 560 )
+
+[node name="Enemy" parent="." instance=ExtResource( 16 )]
+position = Vector2( 160, 1512 )

@@ -1,7 +1,27 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player_old.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player_01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player_01_Grinding.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player_01_Falling.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Falling",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Grinding",
+"speed": 5.0
+} ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 11.0608
@@ -10,8 +30,7 @@ height = 32.0532
 [sub_resource type="CircleShape2D" id=3]
 
 [sub_resource type="Animation" id=4]
-resource_name = "Attack"
-length = 0.323
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("AttackArea2d/AttackCollision:disabled")
 tracks/0/interp = 1
@@ -19,29 +38,33 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.17989 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, false, true ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 16.0764, 24.923 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 1.69862 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -31.8198 )
-texture = ExtResource( 2 )
+frames = SubResource( 1 )
+animation = "Idle"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -4.08144, -35.0536 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 400, 0 )
+offset = Vector2( 250, 0 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
@@ -51,6 +74,9 @@ shape = SubResource( 3 )
 
 [node name="JustAiredTimer" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
+
+[node name="FellDownTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -64,8 +90,19 @@ anims/Attack = SubResource( 4 )
 position = Vector2( 0, -31.8198 )
 
 [node name="AttackCollision" type="CollisionShape2D" parent="AttackArea2d"]
+modulate = Color( 1, 0, 0.937255, 1 )
 position = Vector2( 22.8922, -0.148649 )
-shape = SubResource( 1 )
-disabled = true
+shape = SubResource( 5 )
+
+[node name="GrindingArea2d" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="GrindingCollision" type="CollisionShape2D" parent="GrindingArea2d"]
+modulate = Color( 0.0784314, 1, 0, 1 )
+position = Vector2( 0, -1.53779 )
+shape = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="area_entered" from="AttackArea2d" to="." method="_on_AttackArea2d_area_entered"]
+[connection signal="area_entered" from="GrindingArea2d" to="." method="_on_GrindingArea2d_area_entered"]
