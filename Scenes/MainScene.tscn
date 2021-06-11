@@ -722,7 +722,7 @@ position = Vector2( -8, 448 )
 [node name="Rails" type="Node" parent="."]
 
 [node name="Rail" parent="Rails" instance=ExtResource( 3 )]
-position = Vector2( 1200, 528 )
+position = Vector2( 1168, 528 )
 scale = Vector2( 4.25366, 1.82325 )
 
 [node name="Rail3" parent="Rails" instance=ExtResource( 3 )]
@@ -732,16 +732,16 @@ scale = Vector2( 4.25366, 1.82325 )
 [node name="Pickups" type="Node" parent="."]
 
 [node name="Pickup_Scrap" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 760, 400 )
+position = Vector2( 768, 192 )
 
 [node name="Pickup_Scrap2" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 888, 328 )
+position = Vector2( 896, 120 )
 
 [node name="Pickup_Scrap3" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 1096, 328 )
+position = Vector2( 1104, 120 )
 
 [node name="Pickup_Scrap4" parent="Pickups" instance=ExtResource( 18 )]
-position = Vector2( 1232, 352 )
+position = Vector2( 1240, 144 )
 
 [node name="Player" parent="." groups=[
 "player",

@@ -94,11 +94,15 @@ func grinding():
 	else:
 		$AnimatedSprite.play("Idle")
 		grinding = false
-	if not hitting_rail:
-		if grinding and is_on_floor():
-			fell_down_timer.start()
-			fell_down = true
-			grinding = false
+	
+#	if hitting_rail:
+#		motion.x += 5
+	
+#		if grinding and is_on_floor():
+#			fell_down_timer.start()
+#			fell_down = true
+#			grinding = false
+	
 
 
 
@@ -121,14 +125,14 @@ func jump():
 
 func move():
 	var SpeedLevel = MAXSPEED / 2
-#	if Input.is_action_just_pressed("left"):
-#		if motion.x != -MAXSPEED:
-#			if motion.x > -SpeedLevel:
-#				motion.x -= PUSHSPEED
-#			if motion.x > -SpeedLevel * 2:
-#				motion.x -= PUSHSPEED
-#			if motion.x > 0:
-#				motion.x -= SLOWDOWN * 2
+	if Input.is_action_just_pressed("left"):
+		if motion.x != -MAXSPEED:
+			if motion.x > -SpeedLevel:
+				motion.x -= PUSHSPEED
+			if motion.x > -SpeedLevel * 2:
+				motion.x -= PUSHSPEED
+			if motion.x > 0:
+				motion.x -= SLOWDOWN * 2
 #	Increase speed right
 	if Input.is_action_just_pressed("push") and not grinding and not fell_down:
 		if motion.x != MAXSPEED:
@@ -162,4 +166,9 @@ func _on_AttackArea2d_area_entered(area):
 
 func _on_GrindingArea2d_area_entered(area):
 	hitting_rail = true
-	print(hitting_rail)
+	
+	
+
+
+func _on_GrindingArea2d_area_exited(area):
+	hitting_rail = false

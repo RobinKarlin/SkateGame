@@ -106,3 +106,4 @@ shape = SubResource( 6 )
 
 [connection signal="area_entered" from="AttackArea2d" to="." method="_on_AttackArea2d_area_entered"]
 [connection signal="area_entered" from="GrindingArea2d" to="." method="_on_GrindingArea2d_area_entered"]
+[connection signal="area_exited" from="GrindingArea2d" to="." method="_on_GrindingArea2d_area_exited"]
