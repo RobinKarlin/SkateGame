@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sprites/CH_E_fullSheet_01.png" type="Texture" id=1]
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.6445, 33.7259 )
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Idle"
 length = 2.5
 loop = true
@@ -395,7 +392,7 @@ tracks/31/keys = {
 "values": [ -0.00964947, -0.00964947, -0.00964947, -0.00964947, -0.00964947 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Run"
 length = 0.8
 loop = true
@@ -784,37 +781,39 @@ tracks/31/keys = {
 "values": [ -0.00964947, -0.00964947, -0.00964947, -0.00964947 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=4]
+[sub_resource type="AnimationNodeAnimation" id=3]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=6]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=7]
-
-[sub_resource type="AnimationNodeStateMachine" id=8]
-states/Idle/node = SubResource( 4 )
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/Idle/node = SubResource( 3 )
 states/Idle/position = Vector2( 283.667, 90.1111 )
-states/Run/node = SubResource( 5 )
+states/Run/node = SubResource( 4 )
 states/Run/position = Vector2( 533, 114.63 )
-transitions = [ "Idle", "Run", SubResource( 6 ), "Run", "Idle", SubResource( 7 ) ]
+transitions = [ "Idle", "Run", SubResource( 5 ), "Run", "Idle", SubResource( 6 ) ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 17.4993, 7.75835 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 17.4993, 7.75835 )
+extents = Vector2( 19.1484, 33.7259 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 16.9389, 33.966 )
 
 [node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 0.117859, 0 )
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 5.77899, -36.1186 )
-shape = SubResource( 1 )
 
 [node name="Polygons" type="Node2D" parent="."]
 scale = Vector2( 0.1, 0.1 )
@@ -995,23 +994,34 @@ rest = Transform2D( 0.299653, 0.954048, -0.954048, 0.299653, 180.248, -92.7716 )
 default_length = 60.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 2 )
-anims/Run = SubResource( 3 )
+anims/Idle = SubResource( 1 )
+anims/Run = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 8 )
+tree_root = SubResource( 7 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 9 )
+parameters/playback = SubResource( 8 )
 
 [node name="StompDetector" type="Area2D" parent="."]
 modulate = Color( 0.505882, 0.490196, 0.843137, 1 )
 position = Vector2( 3.64389, -69.9346 )
 monitorable = false
-collision_layer = 0
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
 position = Vector2( 4.34462, -8.40895 )
+shape = SubResource( 9 )
+
+[node name="KIllPlayer" type="Area2D" parent="."]
+position = Vector2( 7.18048, -36.1186 )
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KIllPlayer"]
 shape = SubResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 6.72716, -36.8593 )
+shape = SubResource( 11 )
 
 [connection signal="body_entered" from="StompDetector" to="." method="_on_StompDetector_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player_old.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player_01.png" type="Texture" id=2]
@@ -49,6 +49,9 @@ extents = Vector2( 16.0764, 24.923 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 10, 1.69862 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 20.1472, 30.7421 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
@@ -104,6 +107,15 @@ shape = SubResource( 6 )
 
 [node name="RotationTween" type="Tween" parent="."]
 
+[node name="EnemyDetector" type="Area2D" parent="."]
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+modulate = Color( 0.505882, 0.262745, 0.12549, 1 )
+position = Vector2( -0.840897, -31.2533 )
+shape = SubResource( 7 )
+
 [connection signal="area_entered" from="AttackArea2d" to="." method="_on_AttackArea2d_area_entered"]
 [connection signal="area_entered" from="GrindingArea2d" to="." method="_on_GrindingArea2d_area_entered"]
 [connection signal="area_exited" from="GrindingArea2d" to="." method="_on_GrindingArea2d_area_exited"]
+[connection signal="area_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_area_entered"]

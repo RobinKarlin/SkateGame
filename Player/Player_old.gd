@@ -12,6 +12,7 @@ var FloorNormal = Vector2(0, -1)
 var fell_down = false
 var hitting_rail = false
 var railcollision
+var PlayerDead = false
 
 const SPEED = 400
 const PUSHSPEED = 75
@@ -85,7 +86,12 @@ func rotate_player():
 		rotation = rotation_player
 
 	
-
+func _on_EnemyDetector_area_entered(area):
+	PlayerDead = true
+	if area.is_in_group("Enemies"):
+		position = Checkpoint.last_position
+#	global_position = Checkpoint.last_position
+	print(global_position)
 
 # does not work right now
 #func landing():	
@@ -133,7 +139,8 @@ func falling_down():
 func jump():
 	if Input.is_action_pressed("ollie") and is_on_floor() and not fell_down:
 		motion.y -= JUMP_SPEED
-
+#		position = global_position
+#		position = Checkpoint.last_position
 
 func move():
 	var SpeedLevel = MAXSPEED / 2
@@ -181,5 +188,9 @@ func _on_GrindingArea2d_area_entered(area):
 
 
 func _on_GrindingArea2d_area_exited(area):
-	area.get_parent().grind = false
-	hitting_rail = false
+	if area.is_in_group("rails"):
+		area.get_parent().grind = false
+		hitting_rail = false
+
+
+
