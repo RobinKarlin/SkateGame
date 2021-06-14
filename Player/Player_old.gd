@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var just_aired_timer : Timer = $JustAiredTimer
 onready var fell_down_timer : Timer = $FellDownTimer
+onready var rotation_tween = get_node("RotationTween")
 
 var motion = Vector2(0,0)
 var grinding = false
@@ -10,6 +11,7 @@ var JustAired = false
 var FloorNormal = Vector2(0, -1)
 var fell_down = false
 var hitting_rail = false
+var railcollision
 
 const SPEED = 400
 const PUSHSPEED = 75
@@ -25,10 +27,11 @@ const JUMP_SPEED = GRAVITY + 500
 
 
 func _physics_process(delta):
-	
+#	var railcollision = get_overlapping_areas()
 	motion.y += GRAVITY * delta
 	motion = move_and_slide(motion, FLOOR_NORMAL)
-	apply_gravity()
+	apply_gravity()	
+	rotate_player()
 	jump()
 	move()	
 	attack()
@@ -39,6 +42,7 @@ func _physics_process(delta):
 	grinding()
 	if fell_down:
 		falling_down()
+	
 	
 	
 	
@@ -62,15 +66,24 @@ func colliding():
 
 
 func apply_gravity():
-	
 	if is_on_floor() and $RayCast2D.is_colliding():
 		motion.y = 0		
 	else:
 		motion.y += GRAVITY
 	if is_on_ceiling():
 		motion.y = 1
+	
+
+# rotation on the player while on floor
+func rotate_player():	
+	var rotation_player
 	if is_on_floor():
-		rotation = get_floor_normal().angle() + PI/2
+		rotation_player = get_floor_normal().angle() + PI/2
+		# smooth out rotation, 5th property is time between tweens
+		rotation_tween.interpolate_property(self, "rotation",rotation ,rotation_player ,0.1 ,Tween.TRANS_QUINT, Tween.EASE_OUT)
+		rotation_tween.start()
+		rotation = rotation_player
+
 	
 
 
@@ -86,24 +99,23 @@ func apply_gravity():
 #			JustAired = false
 
 
-func grinding():	
+func grinding():
+	
 	if Input.is_action_pressed("grind"):
-		if not is_on_floor():
-			$AnimatedSprite.play("Grinding")
-			grinding = true
+		$AnimatedSprite.play("Grinding")
+		grinding = true
 	else:
 		$AnimatedSprite.play("Idle")
 		grinding = false
-	
-#	if hitting_rail:
-#		motion.x += 5
-	
-#		if grinding and is_on_floor():
+#	if not grinding and railcollision:
+#		area.get_parent().grind = true
+#	if not hitting_rail and grinding:
 #			fell_down_timer.start()
 #			fell_down = true
 #			grinding = false
+#	if hitting_rail:
+#		motion.x += 5
 	
-
 
 
 func falling_down():
@@ -161,14 +173,13 @@ func _on_AttackArea2d_area_entered(area):
 		area.get_parent().getting_hit()
 
 
-
-
-
 func _on_GrindingArea2d_area_entered(area):
-	hitting_rail = true
-	
-	
+	if grinding:
+		area.get_parent().grind = true
+		hitting_rail = true	
+#	print(grinding)
 
 
 func _on_GrindingArea2d_area_exited(area):
+	area.get_parent().grind = false
 	hitting_rail = false
