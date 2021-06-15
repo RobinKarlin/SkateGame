@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var just_aired_timer : Timer = $JustAiredTimer
 onready var fell_down_timer : Timer = $FellDownTimer
+onready var about_to_fall_timer : Timer = $AboutToFallTimer
 onready var rotation_tween = get_node("RotationTween")
 
 var motion = Vector2(0,0)
@@ -45,11 +46,6 @@ func _physics_process(delta):
 		falling_down()
 	
 	
-	
-	
-	
-	
-	
 
 
 func reset_game():
@@ -86,12 +82,7 @@ func rotate_player():
 		rotation = rotation_player
 
 	
-func _on_EnemyDetector_area_entered(area):
-	PlayerDead = true
-	if area.is_in_group("Enemies"):
-		position = Checkpoint.last_position
-#	global_position = Checkpoint.last_position
-	print(global_position)
+
 
 # does not work right now
 #func landing():	
@@ -106,19 +97,16 @@ func _on_EnemyDetector_area_entered(area):
 
 
 func grinding():
-	
+	var about_to_fall = false
 	if Input.is_action_pressed("grind"):
 		$AnimatedSprite.play("Grinding")
 		grinding = true
 	else:
 		$AnimatedSprite.play("Idle")
 		grinding = false
-#	if not grinding and railcollision:
-#		area.get_parent().grind = true
-#	if not hitting_rail and grinding:
-#			fell_down_timer.start()
-#			fell_down = true
-#			grinding = false
+	
+		
+
 #	if hitting_rail:
 #		motion.x += 5
 	
@@ -182,9 +170,8 @@ func _on_AttackArea2d_area_entered(area):
 
 func _on_GrindingArea2d_area_entered(area):
 	if grinding:
-		area.get_parent().grind = true
-		hitting_rail = true	
-#	print(grinding)
+		area.get_parent().grind = true	
+		hitting_rail = true
 
 
 func _on_GrindingArea2d_area_exited(area):
@@ -194,3 +181,6 @@ func _on_GrindingArea2d_area_exited(area):
 
 
 
+func _on_EnemyDetector_area_entered(area):
+	if area.is_in_group("enemies"):
+		get_tree().change_scene("res://Scenes/MainScene.tscn")

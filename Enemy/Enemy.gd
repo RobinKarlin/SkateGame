@@ -55,7 +55,7 @@ func _process(delta):
 #	if vel.length() > 0:
 #		state_machine.travel("Run")
 
-	vel.x = dir * 500
+	vel.x = dir * 100
 
 
 	vel.y += grav * delta;
@@ -67,8 +67,4 @@ func _process(delta):
 	if is_on_wall():
 		vel.x *= -1.0
 	vel = move_and_slide(vel, Vector2(0, 1))
-	
-
-
-
 

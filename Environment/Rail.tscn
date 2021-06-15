@@ -7,7 +7,7 @@
 extents = Vector2( 49.1443, 1.73369 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 49.5739, 6.50398 )
+extents = Vector2( 49.5739, 13.3905 )
 
 [node name="Rail" type="StaticBody2D"]
 collision_layer = 2
@@ -34,7 +34,7 @@ collision_layer = 2
 [node name="OnRailCollision" type="CollisionShape2D" parent="Area2DOnRail"]
 modulate = Color( 0.96875, 0.0718994, 0.0718994, 1 )
 self_modulate = Color( 0.933594, 0.809601, 0.809601, 1 )
-position = Vector2( -0.157486, -23.3622 )
+position = Vector2( -0.157486, -30.5136 )
 shape = SubResource( 2 )
 
 [connection signal="area_entered" from="Area2DOnRail" to="." method="_on_Area2DOnRail_area_entered"]

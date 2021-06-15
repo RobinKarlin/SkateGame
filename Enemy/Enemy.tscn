@@ -804,7 +804,7 @@ transitions = [ "Idle", "Run", SubResource( 5 ), "Run", "Idle", SubResource( 6 )
 extents = Vector2( 17.4993, 7.75835 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 19.1484, 33.7259 )
+extents = Vector2( 19.3985, 33.7259 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 16.9389, 33.966 )
@@ -1013,11 +1013,14 @@ collision_layer = 32
 position = Vector2( 4.34462, -8.40895 )
 shape = SubResource( 9 )
 
-[node name="KIllPlayer" type="Area2D" parent="."]
+[node name="KIllPlayer" type="Area2D" parent="." groups=[
+"enemies",
+]]
 position = Vector2( 7.18048, -36.1186 )
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KIllPlayer"]
+modulate = Color( 0.662745, 1, 0, 1 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
