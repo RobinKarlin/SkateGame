@@ -1,0 +1,216 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Sprites/Sprite_Zombie_UpperLeg_01.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Sprite_Zombie_Torso_01.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Sprite_Zombie_Head_01.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Sprite_Zombie_UpperArm_01.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Sprite_Zombie_lowerLeg_01.png" type="Texture" id=5]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.52
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 28.1822
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.5
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 28.0979
+height = 40.8471
+
+[sub_resource type="PhysicsMaterial" id=5]
+friction = 0.5
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 13.2677
+height = 32.8216
+
+[sub_resource type="PhysicsMaterial" id=7]
+friction = 0.5
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 12.5825
+height = 41.4874
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 10.9763
+height = 24.6454
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 10.4611
+height = 19.3421
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 12.2679
+height = 39.6611
+
+[node name="Ragdoll" type="Node2D"]
+
+[node name="Head" type="RigidBody2D" parent="."]
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 1 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_Head_01" type="Sprite" parent="Head"]
+position = Vector2( -17.0205, -129.693 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2( -17.5432, -136.447 )
+shape = SubResource( 2 )
+
+[node name="Body" type="RigidBody2D" parent="."]
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 3 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_Torso_01" type="Sprite" parent="Body"]
+position = Vector2( 27.8027, -69.5919 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2( 25.7002, -74.7427 )
+rotation = -0.428816
+shape = SubResource( 4 )
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="."]
+position = Vector2( -7.29053, 23.8664 )
+z_index = 1
+node_a = NodePath("../Leg_L1")
+node_b = NodePath("../Leg_L2")
+disable_collision = false
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2( 86.652, 21.2146 )
+z_index = 1
+node_a = NodePath("../Leg_R1")
+node_b = NodePath("../Leg_R2")
+disable_collision = false
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2( 0.751788, -114.957 )
+node_a = NodePath("../Body")
+node_b = NodePath("../Head")
+bias = 0.9
+disable_collision = false
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2( 18.577, -32.1114 )
+node_a = NodePath("../Body")
+node_b = NodePath("../Leg_R1")
+bias = 0.9
+disable_collision = false
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+visible = false
+position = Vector2( 6.42706, -90.7819 )
+node_a = NodePath("../Body")
+node_b = NodePath("../Arm")
+bias = 0.9
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2( 50.5624, -30.4512 )
+z_index = 1
+node_a = NodePath("../Body")
+node_b = NodePath("../Leg_L1")
+bias = 0.9
+disable_collision = false
+
+[node name="Leg_R1" type="RigidBody2D" parent="."]
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 5 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_UpperLeg_01" type="Sprite" parent="Leg_R1"]
+position = Vector2( 8.13383, -9.14333 )
+rotation = 0.202033
+z_index = -1
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg_R1"]
+position = Vector2( 2.684, -4.79539 )
+rotation = 0.516218
+shape = SubResource( 6 )
+
+[node name="Leg_R2" type="RigidBody2D" parent="."]
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 7 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_lowerLeg_01" type="Sprite" parent="Leg_R2"]
+position = Vector2( -6.91719, 24.4999 )
+rotation = 0.373434
+texture = ExtResource( 5 )
+offset = Vector2( 5.287, 37.479 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg_R2"]
+position = Vector2( -13.5288, 57.8909 )
+rotation = 0.194846
+shape = SubResource( 8 )
+
+[node name="Arm" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( 0.0556183, 3.11463 )
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_UpperArm_01" type="Sprite" parent="Arm"]
+visible = false
+position = Vector2( -2.71737, -69.8219 )
+rotation = -0.27916
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
+visible = false
+position = Vector2( -24.9985, -64.1822 )
+rotation = 0.961923
+shape = SubResource( 9 )
+
+[node name="Leg_L1" type="RigidBody2D" parent="."]
+position = Vector2( 0, -0.629242 )
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 7 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_UpperLeg_02" type="Sprite" parent="Leg_L1"]
+position = Vector2( 65.3819, -11.0384 )
+rotation = -0.733932
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg_L1"]
+position = Vector2( 68.7303, -5.69735 )
+rotation = -0.548839
+scale = Vector2( 1.34125, 1.54428 )
+shape = SubResource( 10 )
+
+[node name="Leg_L2" type="RigidBody2D" parent="."]
+position = Vector2( 86.3046, 21.2087 )
+collision_layer = 32
+collision_mask = 33
+mass = 2.04082
+physics_material_override = SubResource( 7 )
+gravity_scale = 12.0
+
+[node name="Sprite_Zombie_lowerLeg_01" type="Sprite" parent="Leg_L2"]
+position = Vector2( 2.08533, -1.73851 )
+rotation = -0.43631
+texture = ExtResource( 5 )
+offset = Vector2( 5.115, 37.771 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg_L2"]
+position = Vector2( 17.8383, 25.9836 )
+rotation = -0.626747
+shape = SubResource( 11 )
