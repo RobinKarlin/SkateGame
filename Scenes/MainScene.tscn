@@ -813,7 +813,7 @@ position = Vector2( 1104, 120 )
 position = Vector2( 1240, 144 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 640, 552 )
+position = Vector2( 29.5982, 324.321 )
 
 [node name="Enemy" parent="." instance=ExtResource( 16 )]
 position = Vector2( 136, 1144 )
@@ -825,7 +825,7 @@ position = Vector2( 728.996, 554.42 )
 position = Vector2( 1576, 544 )
 
 [node name="Ragdoll" parent="." instance=ExtResource( 21 )]
-position = Vector2( 368, 87.9999 )
+position = Vector2( 368, 87.9008 )
 rotation = -0.815771
 
 [node name="Rail" parent="." instance=ExtResource( 3 )]

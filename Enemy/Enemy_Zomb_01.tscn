@@ -12,7 +12,7 @@ height = 57.8445
 [sub_resource type="CapsuleShape2D" id=2]
 height = 16.7052
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=3]
 height = 5.31528
 
 [sub_resource type="CapsuleShape2D" id=4]
@@ -75,7 +75,7 @@ offset = Vector2( 167.13, -78.7522 )
 position = Vector2( 21.8647, -20.9976 )
 rotation = 1.29348
 scale = Vector2( 3.17968, 10.0092 )
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="torse" type="RigidBody2D" parent="."]
 position = Vector2( -20.055, -47.5063 )
